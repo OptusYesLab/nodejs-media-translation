@@ -94,6 +94,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "stability": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "translationMode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "disableInterimResults": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -118,21 +139,25 @@
                       }
                     },
                     "StreamingTranslateSpeechResult": {
-                      "oneofs": {
-                        "result": {
-                          "oneof": [
-                            "textTranslationResult"
-                          ]
-                        }
-                      },
                       "fields": {
                         "textTranslationResult": {
                           "type": "TextTranslationResult",
                           "id": 1
                         },
+                        "audioTranslationResult": {
+                          "type": "AudioTranslationResult",
+                          "id": 2
+                        },
                         "recognitionResult": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "detectedSourceLanguageCode": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -154,10 +179,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
-                            },
-                            "detectedSourceLanguageCode": {
-                              "type": "string",
-                              "id": 3,
+                            }
+                          }
+                        },
+                        "AudioTranslationResult": {
+                          "fields": {
+                            "audioTranslation": {
+                              "type": "bytes",
+                              "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }

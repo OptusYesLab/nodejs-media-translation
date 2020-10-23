@@ -199,6 +199,15 @@ export namespace google {
 
                     /** StreamingTranslateSpeechConfig singleUtterance */
                     singleUtterance?: (boolean|null);
+
+                    /** StreamingTranslateSpeechConfig stability */
+                    stability?: (string|null);
+
+                    /** StreamingTranslateSpeechConfig translationMode */
+                    translationMode?: (string|null);
+
+                    /** StreamingTranslateSpeechConfig disableInterimResults */
+                    disableInterimResults?: (boolean|null);
                 }
 
                 /** Represents a StreamingTranslateSpeechConfig. */
@@ -215,6 +224,15 @@ export namespace google {
 
                     /** StreamingTranslateSpeechConfig singleUtterance. */
                     public singleUtterance: boolean;
+
+                    /** StreamingTranslateSpeechConfig stability. */
+                    public stability: string;
+
+                    /** StreamingTranslateSpeechConfig translationMode. */
+                    public translationMode: string;
+
+                    /** StreamingTranslateSpeechConfig disableInterimResults. */
+                    public disableInterimResults: boolean;
 
                     /**
                      * Creates a new StreamingTranslateSpeechConfig instance using the specified properties.
@@ -392,8 +410,14 @@ export namespace google {
                     /** StreamingTranslateSpeechResult textTranslationResult */
                     textTranslationResult?: (google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.ITextTranslationResult|null);
 
+                    /** StreamingTranslateSpeechResult audioTranslationResult */
+                    audioTranslationResult?: (google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult|null);
+
                     /** StreamingTranslateSpeechResult recognitionResult */
                     recognitionResult?: (string|null);
+
+                    /** StreamingTranslateSpeechResult detectedSourceLanguageCode */
+                    detectedSourceLanguageCode?: (string|null);
                 }
 
                 /** Represents a StreamingTranslateSpeechResult. */
@@ -408,11 +432,14 @@ export namespace google {
                     /** StreamingTranslateSpeechResult textTranslationResult. */
                     public textTranslationResult?: (google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.ITextTranslationResult|null);
 
+                    /** StreamingTranslateSpeechResult audioTranslationResult. */
+                    public audioTranslationResult?: (google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult|null);
+
                     /** StreamingTranslateSpeechResult recognitionResult. */
                     public recognitionResult: string;
 
-                    /** StreamingTranslateSpeechResult result. */
-                    public result?: "textTranslationResult";
+                    /** StreamingTranslateSpeechResult detectedSourceLanguageCode. */
+                    public detectedSourceLanguageCode: string;
 
                     /**
                      * Creates a new StreamingTranslateSpeechResult instance using the specified properties.
@@ -495,9 +522,6 @@ export namespace google {
 
                         /** TextTranslationResult isFinal */
                         isFinal?: (boolean|null);
-
-                        /** TextTranslationResult detectedSourceLanguageCode */
-                        detectedSourceLanguageCode?: (string|null);
                     }
 
                     /** Represents a TextTranslationResult. */
@@ -514,9 +538,6 @@ export namespace google {
 
                         /** TextTranslationResult isFinal. */
                         public isFinal: boolean;
-
-                        /** TextTranslationResult detectedSourceLanguageCode. */
-                        public detectedSourceLanguageCode: string;
 
                         /**
                          * Creates a new TextTranslationResult instance using the specified properties.
@@ -584,6 +605,96 @@ export namespace google {
 
                         /**
                          * Converts this TextTranslationResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an AudioTranslationResult. */
+                    interface IAudioTranslationResult {
+
+                        /** AudioTranslationResult audioTranslation */
+                        audioTranslation?: (Uint8Array|string|null);
+                    }
+
+                    /** Represents an AudioTranslationResult. */
+                    class AudioTranslationResult implements IAudioTranslationResult {
+
+                        /**
+                         * Constructs a new AudioTranslationResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult);
+
+                        /** AudioTranslationResult audioTranslation. */
+                        public audioTranslation: (Uint8Array|string);
+
+                        /**
+                         * Creates a new AudioTranslationResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AudioTranslationResult instance
+                         */
+                        public static create(properties?: google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult): google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult;
+
+                        /**
+                         * Encodes the specified AudioTranslationResult message. Does not implicitly {@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.verify|verify} messages.
+                         * @param message AudioTranslationResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AudioTranslationResult message, length delimited. Does not implicitly {@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.verify|verify} messages.
+                         * @param message AudioTranslationResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AudioTranslationResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AudioTranslationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult;
+
+                        /**
+                         * Decodes an AudioTranslationResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AudioTranslationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult;
+
+                        /**
+                         * Verifies an AudioTranslationResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AudioTranslationResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AudioTranslationResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult;
+
+                        /**
+                         * Creates a plain object from an AudioTranslationResult message. Also converts values to other types if specified.
+                         * @param message AudioTranslationResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AudioTranslationResult to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };

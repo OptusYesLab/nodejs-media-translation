@@ -457,6 +457,9 @@
                          * @interface IStreamingTranslateSpeechConfig
                          * @property {google.cloud.mediatranslation.v1beta1.ITranslateSpeechConfig|null} [audioConfig] StreamingTranslateSpeechConfig audioConfig
                          * @property {boolean|null} [singleUtterance] StreamingTranslateSpeechConfig singleUtterance
+                         * @property {string|null} [stability] StreamingTranslateSpeechConfig stability
+                         * @property {string|null} [translationMode] StreamingTranslateSpeechConfig translationMode
+                         * @property {boolean|null} [disableInterimResults] StreamingTranslateSpeechConfig disableInterimResults
                          */
     
                         /**
@@ -491,6 +494,30 @@
                         StreamingTranslateSpeechConfig.prototype.singleUtterance = false;
     
                         /**
+                         * StreamingTranslateSpeechConfig stability.
+                         * @member {string} stability
+                         * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechConfig
+                         * @instance
+                         */
+                        StreamingTranslateSpeechConfig.prototype.stability = "";
+    
+                        /**
+                         * StreamingTranslateSpeechConfig translationMode.
+                         * @member {string} translationMode
+                         * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechConfig
+                         * @instance
+                         */
+                        StreamingTranslateSpeechConfig.prototype.translationMode = "";
+    
+                        /**
+                         * StreamingTranslateSpeechConfig disableInterimResults.
+                         * @member {boolean} disableInterimResults
+                         * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechConfig
+                         * @instance
+                         */
+                        StreamingTranslateSpeechConfig.prototype.disableInterimResults = false;
+    
+                        /**
                          * Creates a new StreamingTranslateSpeechConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechConfig
@@ -518,6 +545,12 @@
                                 $root.google.cloud.mediatranslation.v1beta1.TranslateSpeechConfig.encode(message.audioConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.singleUtterance != null && Object.hasOwnProperty.call(message, "singleUtterance"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.singleUtterance);
+                            if (message.stability != null && Object.hasOwnProperty.call(message, "stability"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.stability);
+                            if (message.translationMode != null && Object.hasOwnProperty.call(message, "translationMode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.translationMode);
+                            if (message.disableInterimResults != null && Object.hasOwnProperty.call(message, "disableInterimResults"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.disableInterimResults);
                             return writer;
                         };
     
@@ -557,6 +590,15 @@
                                     break;
                                 case 2:
                                     message.singleUtterance = reader.bool();
+                                    break;
+                                case 3:
+                                    message.stability = reader.string();
+                                    break;
+                                case 4:
+                                    message.translationMode = reader.string();
+                                    break;
+                                case 5:
+                                    message.disableInterimResults = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -601,6 +643,15 @@
                             if (message.singleUtterance != null && message.hasOwnProperty("singleUtterance"))
                                 if (typeof message.singleUtterance !== "boolean")
                                     return "singleUtterance: boolean expected";
+                            if (message.stability != null && message.hasOwnProperty("stability"))
+                                if (!$util.isString(message.stability))
+                                    return "stability: string expected";
+                            if (message.translationMode != null && message.hasOwnProperty("translationMode"))
+                                if (!$util.isString(message.translationMode))
+                                    return "translationMode: string expected";
+                            if (message.disableInterimResults != null && message.hasOwnProperty("disableInterimResults"))
+                                if (typeof message.disableInterimResults !== "boolean")
+                                    return "disableInterimResults: boolean expected";
                             return null;
                         };
     
@@ -623,6 +674,12 @@
                             }
                             if (object.singleUtterance != null)
                                 message.singleUtterance = Boolean(object.singleUtterance);
+                            if (object.stability != null)
+                                message.stability = String(object.stability);
+                            if (object.translationMode != null)
+                                message.translationMode = String(object.translationMode);
+                            if (object.disableInterimResults != null)
+                                message.disableInterimResults = Boolean(object.disableInterimResults);
                             return message;
                         };
     
@@ -642,11 +699,20 @@
                             if (options.defaults) {
                                 object.audioConfig = null;
                                 object.singleUtterance = false;
+                                object.stability = "";
+                                object.translationMode = "";
+                                object.disableInterimResults = false;
                             }
                             if (message.audioConfig != null && message.hasOwnProperty("audioConfig"))
                                 object.audioConfig = $root.google.cloud.mediatranslation.v1beta1.TranslateSpeechConfig.toObject(message.audioConfig, options);
                             if (message.singleUtterance != null && message.hasOwnProperty("singleUtterance"))
                                 object.singleUtterance = message.singleUtterance;
+                            if (message.stability != null && message.hasOwnProperty("stability"))
+                                object.stability = message.stability;
+                            if (message.translationMode != null && message.hasOwnProperty("translationMode"))
+                                object.translationMode = message.translationMode;
+                            if (message.disableInterimResults != null && message.hasOwnProperty("disableInterimResults"))
+                                object.disableInterimResults = message.disableInterimResults;
                             return object;
                         };
     
@@ -913,7 +979,9 @@
                          * @memberof google.cloud.mediatranslation.v1beta1
                          * @interface IStreamingTranslateSpeechResult
                          * @property {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.ITextTranslationResult|null} [textTranslationResult] StreamingTranslateSpeechResult textTranslationResult
+                         * @property {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult|null} [audioTranslationResult] StreamingTranslateSpeechResult audioTranslationResult
                          * @property {string|null} [recognitionResult] StreamingTranslateSpeechResult recognitionResult
+                         * @property {string|null} [detectedSourceLanguageCode] StreamingTranslateSpeechResult detectedSourceLanguageCode
                          */
     
                         /**
@@ -940,6 +1008,14 @@
                         StreamingTranslateSpeechResult.prototype.textTranslationResult = null;
     
                         /**
+                         * StreamingTranslateSpeechResult audioTranslationResult.
+                         * @member {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult|null|undefined} audioTranslationResult
+                         * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult
+                         * @instance
+                         */
+                        StreamingTranslateSpeechResult.prototype.audioTranslationResult = null;
+    
+                        /**
                          * StreamingTranslateSpeechResult recognitionResult.
                          * @member {string} recognitionResult
                          * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult
@@ -947,19 +1023,13 @@
                          */
                         StreamingTranslateSpeechResult.prototype.recognitionResult = "";
     
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
                         /**
-                         * StreamingTranslateSpeechResult result.
-                         * @member {"textTranslationResult"|undefined} result
+                         * StreamingTranslateSpeechResult detectedSourceLanguageCode.
+                         * @member {string} detectedSourceLanguageCode
                          * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult
                          * @instance
                          */
-                        Object.defineProperty(StreamingTranslateSpeechResult.prototype, "result", {
-                            get: $util.oneOfGetter($oneOfFields = ["textTranslationResult"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
+                        StreamingTranslateSpeechResult.prototype.detectedSourceLanguageCode = "";
     
                         /**
                          * Creates a new StreamingTranslateSpeechResult instance using the specified properties.
@@ -987,8 +1057,12 @@
                                 writer = $Writer.create();
                             if (message.textTranslationResult != null && Object.hasOwnProperty.call(message, "textTranslationResult"))
                                 $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.encode(message.textTranslationResult, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.audioTranslationResult != null && Object.hasOwnProperty.call(message, "audioTranslationResult"))
+                                $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.encode(message.audioTranslationResult, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.recognitionResult != null && Object.hasOwnProperty.call(message, "recognitionResult"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.recognitionResult);
+                            if (message.detectedSourceLanguageCode != null && Object.hasOwnProperty.call(message, "detectedSourceLanguageCode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.detectedSourceLanguageCode);
                             return writer;
                         };
     
@@ -1026,8 +1100,14 @@
                                 case 1:
                                     message.textTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.decode(reader, reader.uint32());
                                     break;
+                                case 2:
+                                    message.audioTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.decode(reader, reader.uint32());
+                                    break;
                                 case 3:
                                     message.recognitionResult = reader.string();
+                                    break;
+                                case 4:
+                                    message.detectedSourceLanguageCode = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1064,18 +1144,22 @@
                         StreamingTranslateSpeechResult.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            var properties = {};
                             if (message.textTranslationResult != null && message.hasOwnProperty("textTranslationResult")) {
-                                properties.result = 1;
-                                {
-                                    var error = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.verify(message.textTranslationResult);
-                                    if (error)
-                                        return "textTranslationResult." + error;
-                                }
+                                var error = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.verify(message.textTranslationResult);
+                                if (error)
+                                    return "textTranslationResult." + error;
+                            }
+                            if (message.audioTranslationResult != null && message.hasOwnProperty("audioTranslationResult")) {
+                                var error = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.verify(message.audioTranslationResult);
+                                if (error)
+                                    return "audioTranslationResult." + error;
                             }
                             if (message.recognitionResult != null && message.hasOwnProperty("recognitionResult"))
                                 if (!$util.isString(message.recognitionResult))
                                     return "recognitionResult: string expected";
+                            if (message.detectedSourceLanguageCode != null && message.hasOwnProperty("detectedSourceLanguageCode"))
+                                if (!$util.isString(message.detectedSourceLanguageCode))
+                                    return "detectedSourceLanguageCode: string expected";
                             return null;
                         };
     
@@ -1096,8 +1180,15 @@
                                     throw TypeError(".google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.textTranslationResult: object expected");
                                 message.textTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.fromObject(object.textTranslationResult);
                             }
+                            if (object.audioTranslationResult != null) {
+                                if (typeof object.audioTranslationResult !== "object")
+                                    throw TypeError(".google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.audioTranslationResult: object expected");
+                                message.audioTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.fromObject(object.audioTranslationResult);
+                            }
                             if (object.recognitionResult != null)
                                 message.recognitionResult = String(object.recognitionResult);
+                            if (object.detectedSourceLanguageCode != null)
+                                message.detectedSourceLanguageCode = String(object.detectedSourceLanguageCode);
                             return message;
                         };
     
@@ -1114,15 +1205,20 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
+                                object.textTranslationResult = null;
+                                object.audioTranslationResult = null;
                                 object.recognitionResult = "";
-                            if (message.textTranslationResult != null && message.hasOwnProperty("textTranslationResult")) {
-                                object.textTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.toObject(message.textTranslationResult, options);
-                                if (options.oneofs)
-                                    object.result = "textTranslationResult";
+                                object.detectedSourceLanguageCode = "";
                             }
+                            if (message.textTranslationResult != null && message.hasOwnProperty("textTranslationResult"))
+                                object.textTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult.toObject(message.textTranslationResult, options);
+                            if (message.audioTranslationResult != null && message.hasOwnProperty("audioTranslationResult"))
+                                object.audioTranslationResult = $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.toObject(message.audioTranslationResult, options);
                             if (message.recognitionResult != null && message.hasOwnProperty("recognitionResult"))
                                 object.recognitionResult = message.recognitionResult;
+                            if (message.detectedSourceLanguageCode != null && message.hasOwnProperty("detectedSourceLanguageCode"))
+                                object.detectedSourceLanguageCode = message.detectedSourceLanguageCode;
                             return object;
                         };
     
@@ -1145,7 +1241,6 @@
                              * @interface ITextTranslationResult
                              * @property {string|null} [translation] TextTranslationResult translation
                              * @property {boolean|null} [isFinal] TextTranslationResult isFinal
-                             * @property {string|null} [detectedSourceLanguageCode] TextTranslationResult detectedSourceLanguageCode
                              */
     
                             /**
@@ -1180,14 +1275,6 @@
                             TextTranslationResult.prototype.isFinal = false;
     
                             /**
-                             * TextTranslationResult detectedSourceLanguageCode.
-                             * @member {string} detectedSourceLanguageCode
-                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult
-                             * @instance
-                             */
-                            TextTranslationResult.prototype.detectedSourceLanguageCode = "";
-    
-                            /**
                              * Creates a new TextTranslationResult instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult
@@ -1215,8 +1302,6 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.translation);
                                 if (message.isFinal != null && Object.hasOwnProperty.call(message, "isFinal"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isFinal);
-                                if (message.detectedSourceLanguageCode != null && Object.hasOwnProperty.call(message, "detectedSourceLanguageCode"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.detectedSourceLanguageCode);
                                 return writer;
                             };
     
@@ -1256,9 +1341,6 @@
                                         break;
                                     case 2:
                                         message.isFinal = reader.bool();
-                                        break;
-                                    case 3:
-                                        message.detectedSourceLanguageCode = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -1301,9 +1383,6 @@
                                 if (message.isFinal != null && message.hasOwnProperty("isFinal"))
                                     if (typeof message.isFinal !== "boolean")
                                         return "isFinal: boolean expected";
-                                if (message.detectedSourceLanguageCode != null && message.hasOwnProperty("detectedSourceLanguageCode"))
-                                    if (!$util.isString(message.detectedSourceLanguageCode))
-                                        return "detectedSourceLanguageCode: string expected";
                                 return null;
                             };
     
@@ -1323,8 +1402,6 @@
                                     message.translation = String(object.translation);
                                 if (object.isFinal != null)
                                     message.isFinal = Boolean(object.isFinal);
-                                if (object.detectedSourceLanguageCode != null)
-                                    message.detectedSourceLanguageCode = String(object.detectedSourceLanguageCode);
                                 return message;
                             };
     
@@ -1344,14 +1421,11 @@
                                 if (options.defaults) {
                                     object.translation = "";
                                     object.isFinal = false;
-                                    object.detectedSourceLanguageCode = "";
                                 }
                                 if (message.translation != null && message.hasOwnProperty("translation"))
                                     object.translation = message.translation;
                                 if (message.isFinal != null && message.hasOwnProperty("isFinal"))
                                     object.isFinal = message.isFinal;
-                                if (message.detectedSourceLanguageCode != null && message.hasOwnProperty("detectedSourceLanguageCode"))
-                                    object.detectedSourceLanguageCode = message.detectedSourceLanguageCode;
                                 return object;
                             };
     
@@ -1367,6 +1441,202 @@
                             };
     
                             return TextTranslationResult;
+                        })();
+    
+                        StreamingTranslateSpeechResult.AudioTranslationResult = (function() {
+    
+                            /**
+                             * Properties of an AudioTranslationResult.
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult
+                             * @interface IAudioTranslationResult
+                             * @property {Uint8Array|null} [audioTranslation] AudioTranslationResult audioTranslation
+                             */
+    
+                            /**
+                             * Constructs a new AudioTranslationResult.
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult
+                             * @classdesc Represents an AudioTranslationResult.
+                             * @implements IAudioTranslationResult
+                             * @constructor
+                             * @param {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult=} [properties] Properties to set
+                             */
+                            function AudioTranslationResult(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AudioTranslationResult audioTranslation.
+                             * @member {Uint8Array} audioTranslation
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @instance
+                             */
+                            AudioTranslationResult.prototype.audioTranslation = $util.newBuffer([]);
+    
+                            /**
+                             * Creates a new AudioTranslationResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @static
+                             * @param {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult=} [properties] Properties to set
+                             * @returns {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult} AudioTranslationResult instance
+                             */
+                            AudioTranslationResult.create = function create(properties) {
+                                return new AudioTranslationResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AudioTranslationResult message. Does not implicitly {@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @static
+                             * @param {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult} message AudioTranslationResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AudioTranslationResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.audioTranslation != null && Object.hasOwnProperty.call(message, "audioTranslation"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.audioTranslation);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AudioTranslationResult message, length delimited. Does not implicitly {@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @static
+                             * @param {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.IAudioTranslationResult} message AudioTranslationResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AudioTranslationResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AudioTranslationResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult} AudioTranslationResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AudioTranslationResult.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.audioTranslation = reader.bytes();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AudioTranslationResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult} AudioTranslationResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AudioTranslationResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AudioTranslationResult message.
+                             * @function verify
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AudioTranslationResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.audioTranslation != null && message.hasOwnProperty("audioTranslation"))
+                                    if (!(message.audioTranslation && typeof message.audioTranslation.length === "number" || $util.isString(message.audioTranslation)))
+                                        return "audioTranslation: buffer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AudioTranslationResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult} AudioTranslationResult
+                             */
+                            AudioTranslationResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult)
+                                    return object;
+                                var message = new $root.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult();
+                                if (object.audioTranslation != null)
+                                    if (typeof object.audioTranslation === "string")
+                                        $util.base64.decode(object.audioTranslation, message.audioTranslation = $util.newBuffer($util.base64.length(object.audioTranslation)), 0);
+                                    else if (object.audioTranslation.length)
+                                        message.audioTranslation = object.audioTranslation;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AudioTranslationResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @static
+                             * @param {google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult} message AudioTranslationResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AudioTranslationResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    if (options.bytes === String)
+                                        object.audioTranslation = "";
+                                    else {
+                                        object.audioTranslation = [];
+                                        if (options.bytes !== Array)
+                                            object.audioTranslation = $util.newBuffer(object.audioTranslation);
+                                    }
+                                if (message.audioTranslation != null && message.hasOwnProperty("audioTranslation"))
+                                    object.audioTranslation = options.bytes === String ? $util.base64.encode(message.audioTranslation, 0, message.audioTranslation.length) : options.bytes === Array ? Array.prototype.slice.call(message.audioTranslation) : message.audioTranslation;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AudioTranslationResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.AudioTranslationResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AudioTranslationResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AudioTranslationResult;
                         })();
     
                         return StreamingTranslateSpeechResult;

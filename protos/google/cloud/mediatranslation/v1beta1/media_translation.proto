@@ -98,6 +98,52 @@ message StreamingTranslateSpeechConfig {
   // sentence in a streaming way, one should override (if 'is_final' of previous
   // response is false), or append (if 'is_final' of previous response is true).
   bool single_utterance = 2 [(google.api.field_behavior) = OPTIONAL];
+
+
+  // Optional. Stability control for the media translation text. The value should be
+  // "LOW", "MEDIUM", "HIGH". It applies to text/text_and_audio translation
+  // only.
+  // For audio translation mode, we only support HIGH stability mode,
+  // low/medium stability mode will throw argument error.
+  // Default empty string will be treated as "HIGH" in audio translation mode;
+  // will be treated as "LOW" in other translation mode.
+  // Note that stability and speed would be trade off.
+  // 1. "LOW": In low mode, translation service will start to do translation
+  // right after getting recognition response. The speed will be faster.
+  // 2. "MEDIUM": In medium mode, translation service will
+  // check if the recognition response is stable enough or not, and only
+  // translate recognition response which is not likely to be changed later.
+  // 3. "HIGH": In high mode, translation service will wait for more stable
+  // recognition responses, and then start to do translation. Also, the
+  // following recognition responses cannot modify previous recognition
+  // responses. Thus it may impact quality in some situation. "HIGH" stability
+  // will generate "final" responses more frequently.
+
+  string stability = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Translation mode, the value should be "text", "audio", "text_and_audio".
+  // Default empty string will be treated as "text".
+  // 1. "text": The response will be text translation. Text translation has a
+  // field "is_final". Detailed definition can be found in
+  // `TextTranslationResult`.
+  // 2. "audio": The response will be audio translation. Audio translation does
+  // not have "is_final" field, which means each audio translation response is
+  // stable and will not be changed by later response.
+  // Translation mode "audio" can only be used with "high" stability mode,
+  // 3. "text_and_audio": The response will have a text translation, when
+  // "is_final" is true, we will also output its corresponding audio
+  // translation. When "is_final" is false, audio_translation field will be
+  // empty.
+
+  string translation_mode = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If disable_interim_results is true, we will only return "final" responses.
+  // Otherwise, we will return all the responses. Default value will be false.
+  // User can only set disable_interim_results to be true with "high" stability
+  // mode.
+
+  bool disable_interim_results = 5 [(google.api.field_behavior) = OPTIONAL];
+
 }
 
 // The top-level message sent by the client for the `StreamingTranslateSpeech`
@@ -144,16 +190,22 @@ message StreamingTranslateSpeechResult {
     // Output only. The source language code (BCP-47) detected in the audio. Speech
     // translation result will translate in the most likely language detected
     // including the alternative source languages and main source_language_code.
-    string detected_source_language_code = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // TODO below is commented as not in new proto but need to see impact
+    // string detected_source_language_code = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+  
+  // Audio translation result.
+  message AudioTranslationResult {
+    // Output only. The translated audio.
+    bytes audio_translation = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
-  // Translation result.
-  //
-  // Use oneof field to reserve for future tts result.
-  oneof result {
-    // Text translation result.
-    TextTranslationResult text_translation_result = 1;
-  }
+  // Text translation result.
+  TextTranslationResult text_translation_result = 1;
+
+  // Audio translation result.
+  AudioTranslationResult audio_translation_result = 2;
 
   // Output only. The debug only recognition result in original language. This field is debug
   // only and will be set to empty string if not available.
@@ -161,6 +213,10 @@ message StreamingTranslateSpeechResult {
   //
   // Still need to decide whether to expose this field by default.
   string recognition_result = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only.
+  // TODO workout why this moved here
+  string detected_source_language_code = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A streaming speech translation response corresponding to a portion of
